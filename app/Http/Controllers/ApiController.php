@@ -13,7 +13,7 @@ class ApiController extends Controller
 {
     public function login(Request $request): JsonResponse
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
