@@ -19,7 +19,7 @@ class ExtractorService
             'created_at' => new Carbon('now'),
         ];
         $html = file_get_contents($rawData['url']);
-        file_put_contents('yt.html', $html);
+//        file_put_contents('yt.html', $html);
         $crawler = new Crawler($html);
 
         if (isset($rawData['date'])) {
