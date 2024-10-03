@@ -10,8 +10,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-/** AUTH - TOKEN */
-Route::get('/token', [ApiController::class, 'login']);
+/** AUTH */
+Route::get('/token', [ApiController::class, 'token'])->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
     /** API */

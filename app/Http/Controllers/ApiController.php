@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
-    public function login(Request $request): JsonResponse
+    public function token(Request $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
 
