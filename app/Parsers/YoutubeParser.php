@@ -2,6 +2,7 @@
 
 namespace App\Parsers;
 
+use App\Exceptions\DuplicateException;
 use App\Models\DomainPatterns;
 use App\Models\Videos;
 use App\Services\ExtractorService;
@@ -15,9 +16,16 @@ readonly class YoutubeParser implements Parser
     ) {
     }
 
+    /**
+     * @throws DuplicateException
+     */
     public function parse(array $data, DomainPatterns $pattern): int
     {
-        # @todo add duplicate check
+        $video = Videos::where(['url' => $data['url']])->first();
+
+        if ($video) {
+            throw new DuplicateException('Takie video już istnieje!');
+        }
 
         $rawData = $this->extractor->extract($data, $pattern);
         $data = $this->transformer->transform($rawData, $pattern);
