@@ -18,7 +18,7 @@ class Articles extends Model
         'created_at'  => 'date:d-m-Y',
     ];
     protected $appends = ['domains_name', 'domains_icon', 'date_timestamp', 'created_at_timestamp', 'is_read', 'read_time'];
-    protected $fillable = ['domains_id', 'url', 'title', 'image', 'date', 'author', 'category', 'tags', 'content', 'words_count', 'created_at', 'is_premium'];
+    protected $fillable = ['domains_id', 'url', 'title', 'image', 'date', 'author', 'category', 'tags', 'content', 'words_count', 'created_at', 'is_premium', 'archived_at'];
 
     public function domain()
     {

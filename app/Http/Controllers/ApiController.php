@@ -30,6 +30,7 @@ class ApiController extends Controller
         $requestData = $request->validate([
             'url' => ['string'],
             'date' => ['numeric'],
+            'playlists_id' => ['numeric'],
         ]);
 
         if (!isset($requestData['url'])) {

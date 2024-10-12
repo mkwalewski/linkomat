@@ -16,6 +16,7 @@ class ExtractorService
             'url' => $rawData['url'],
             'is_premium' => false,
             'domains_id' => $pattern->domain->id,
+            'playlists_id' => null,
             'created_at' => new Carbon('now'),
         ];
         $html = file_get_contents($rawData['url']);
@@ -24,6 +25,10 @@ class ExtractorService
 
         if (isset($rawData['date'])) {
             $data['created_at'] = Carbon::createFromTimestamp($rawData['date']);
+        }
+
+        if (isset($rawData['playlists_id'])) {
+            $data['playlists_id'] = (int)$rawData['playlists_id'];
         }
 
         if ($pattern->domain->name === 'businessinsider.com.pl' && str_contains($html, 'class="premium-wrapper"')) {
