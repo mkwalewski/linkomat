@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\DuplicateException;
+use App\Exceptions\NoContentException;
 use App\Exceptions\NoParserException;
 use App\Services\ParserService;
 use Illuminate\Http\JsonResponse;
@@ -41,6 +42,8 @@ class ApiController extends Controller
             $id = $parserService->parse($requestData);
         } catch (NoParserException $exception) {
             return response()->json(['message' => $exception->getMessage()], 501);
+        } catch (NoContentException $exception) {
+            return response()->json(['message' => $exception->getMessage()], 503);
         } catch (DuplicateException $exception) {
             return response()->json(['message' => $exception->getMessage()], 409);
         } catch (\Exception $exception) {

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\NoContentException;
 use App\Helpers\ArrayHelper;
 use App\Helpers\RegExpHelper;
 use App\Models\DomainPatterns;
@@ -66,6 +67,10 @@ class ExtractorService
                 };
             }
             $data[$field->field] = $value ?? null;
+        }
+
+        if (is_null($data['title'])) {
+            throw new NoContentException('Nie ma danych!');
         }
 
         return $data;
