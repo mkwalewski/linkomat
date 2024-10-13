@@ -28,5 +28,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/list', 'list');
         Route::post('/mark_as_watch', 'watch');
         Route::post('/mark_as_archived', 'archived');
+        Route::post('/set_playlist', 'setPlaylist');
     });
 });

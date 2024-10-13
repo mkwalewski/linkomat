@@ -63,4 +63,32 @@ class VideosController extends Controller
 
         return response()->json(['message' => 'Musisz podać id!'], 400);
     }
+
+    public function setPlaylist(Request $request): JsonResponse
+    {
+        $ids = $request->post('ids');
+        $playlistId = (int)$request->post('playlistId');
+
+        if (!$playlistId) {
+            $playlistId = null;
+        }
+
+        try {
+            $videos = Videos::where(['id' => $ids])->get();
+            foreach ($videos as $video) {
+                $video->playlists_id = $playlistId;
+                $video->save();
+            }
+        } catch (\Exception $exception) {
+            report($exception);
+
+            return response()->json(['message' => 'Błąd przy ustawianiu listy dla filmów!'], 500);
+        }
+
+        return response()->json([
+            'ids' => $ids,
+            'playlistId' => $playlistId,
+            'message' => 'Pomyślnie ustawiono listę dla filmów',
+        ], 200);
+    }
 }
