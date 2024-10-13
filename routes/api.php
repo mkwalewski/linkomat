@@ -27,5 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('videos')->controller(VideosController::class)->group(function () {
         Route::get('/list', 'list');
         Route::post('/mark_as_watch', 'watch');
+        Route::post('/mark_as_archived', 'archived');
     });
 });

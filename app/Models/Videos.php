@@ -16,7 +16,7 @@ class Videos extends Model
         'date'  => 'date:d-m-Y',
         'created_at'  => 'date:d-m-Y',
     ];
-    protected $appends = ['is_watch', 'length_formatted', 'view_count_formatted', 'date_timestamp', 'created_at_timestamp'];
+    protected $appends = ['is_watch', 'is_archived', 'length_formatted', 'view_count_formatted', 'date_timestamp', 'created_at_timestamp'];
     protected $fillable = ['domains_id', 'url', 'video_id', 'channel_id', 'channel_url', 'title', 'author', 'date', 'category', 'keywords', 'short_description', 'view_count', 'length', 'thumb', 'created_at', 'watch_at', 'archived_at', 'playlists_id'];
 
     private function getViewCountFormatted()
@@ -36,6 +36,13 @@ class Videos extends Model
     {
         return new Attribute(
             get: fn () => (bool)$this->watch_at
+        );
+    }
+
+    protected function isArchived(): Attribute
+    {
+        return new Attribute(
+            get: fn () => (bool)$this->archived_at
         );
     }
 
