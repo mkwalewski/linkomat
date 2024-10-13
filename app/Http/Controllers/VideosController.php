@@ -74,7 +74,7 @@ class VideosController extends Controller
         }
 
         try {
-            $videos = Videos::where(['id' => $ids])->get();
+            $videos = Videos::whereIn('id', $ids)->get();
             foreach ($videos as $video) {
                 $video->playlists_id = $playlistId;
                 $video->save();
